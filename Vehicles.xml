@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Vehicles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Vehicles.xsd">
+	<Vehicle>
+		<name>T3 “Xiphos”</name>
+		<Faction>Colonials</Faction>
+		<Type>Land Vehicles</Type>
+		<SubType>Armoured Car</SubType>
+		<version>1.60</version>
+		<Image></Image>
+		
+	</Vehicle>
+</Vehicles>

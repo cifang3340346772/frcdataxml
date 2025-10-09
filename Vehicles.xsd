@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="Vehicles">
+		
+	    <xs:complexType>
+
+			<xs:sequence>
+				
+				<!-- 载具名 -->
+				<xs:element name="Vehicle" minOccurs="0" maxOccurs="unbounded" >
+					
+					 <xs:complexType>
+
+						<xs:sequence>
+							<!-- 载具名 -->
+							<xs:element name="name" type="xs:string"/>
+								
+							<!-- 所属阵营 -->
+							<xs:element name="Faction">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="Colonials"/>
+										<xs:enumeration value="Wardens"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+
+							<!-- 载具大类别 -->
+							<xs:element name="Type">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="Land Vehicles"/>
+										<xs:enumeration value="Naval Vehicles"/>
+										<xs:enumeration value="Railway Vehicles"/>
+										<xs:enumeration value="Relic Vehicles"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							
+							<!-- 载具小类别 -->
+							<xs:element name="SubType" type="xs:string"/>
+
+							<!-- 版本号 -->
+							<!-- 版本号应与游戏steam版本号一致,以适配当前游戏版本 -->
+							<xs:element name="version">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="\d+\.\d{2}"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+
+							<!-- 载具图片 -->
+							<!-- 此处放置对应贴图文件 -->
+							<xs:element name="Image">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value=".*\.(png|jpg)$"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+
+							<!-- 载具生命 -->
+							<xs:element name="Health" type="xs:integer"/>
+
+							<!-- 瘫痪阈值 -->
+							<xs:element name="DisableThreshold" type="xs:integer"/>
+							
+							<!-- 生命修复 -->
+							<xs:element name="HealthRegen">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="material" type="xs:string"/>
+										<xs:element name="fund" type="xs:integer"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+
+							<!-- 载具护甲 -->
+							<xs:element name="Armor">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="type">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="Unarmoured"/>
+													<xs:enumeration value="Light armoured"/>
+													<xs:enumeration value="Heavy armoured"/>
+													<xs:enumeration value="Ships"/>
+													<xs:enumeration value="Large Ship"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="value" type="xs:integer"/>
+										<xs:element name="max" type="xs:integer"/>
+										<xs:element name="min" type="xs:integer"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<!-- 护甲修复 -->
+							
+							<xs:element name="ArmorRegen">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="space" type="xs:string"/>
+										<xs:element name="material" type="xs:string"/>
+										<xs:element name="fund" type="xs:integer"/>
+										<xs:element name="time" type="xs:integer"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+
+							<!-- 载具武器 -->
+							<!-- 
+							 此处放置武器列表 对应武器放置于 weapon.xml
+							 注意：此处的武器名称应与weapon.xml中的<name>栏一致，否则会导致软件报错未能找到对应属性
+							 -->
+							<xs:element name="Weapons">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="name" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							
+							<!-- 兼容燃料 -->
+							<!-- 
+							如果是标准燃料车，则填写 normal、重油车填写 heavy、如果是浓缩油车则填写 concentrated 
+							-->
+							<xs:element name="FuelType">
+								 <xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="normal"/>
+										<xs:enumeration value="heavy"/>
+										<xs:enumeration value="concentrated"/>
+									</xs:restriction>
+								 </xs:simpleType>
+							</xs:element>
+
+								<!-- 载具油量 -->
+								<!-- 载具油量单位：升 -->
+								<xs:element name="Fuel" type="xs:integer"/>
+
+								<!-- 可用时间 -->
+								<!-- 可用时间单位：秒 -->
+								<xs:element name="Duration" type="xs:integer"/>
+
+								<!-- 可用乘员数 -->
+								<xs:element name="Crew" type="xs:integer"/>
+
+								<!-- 生产平台 -->
+								<xs:element name="Description">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="None"/>
+											<xs:enumeration value="Small Assembly Station-base"/>
+											<xs:enumeration value="Small Assembly Station-Motor Pool"/>
+											<xs:enumeration value="Small Assembly Station-Battery Line"/>
+											<xs:enumeration value="Small Assembly Station-Field Station"/>
+											<xs:enumeration value="Small Assembly Station-Tank Factory"/>
+											<xs:enumeration value="Small Assembly Station-Weapons Platform"/>
+											<xs:enumeration value="Small Assembly Station-Naval Works "/>
+											<xs:enumeration value="Small Assembly Station-Advanced Structure Manufactory "/>
+											<xs:enumeration value="Large Assembly Station-base"/>
+											<xs:enumeration value="Large Assembly Station-Train Assembly"/>
+											<xs:enumeration value="Large Assembly Station-Heavy Tank Assembly"/>
+											<xs:enumeration value="Dry Dock"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								
+								<!-- 载具原料 -->
+								<xs:element name="cost">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="material" minOccurs="0" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="name" type="xs:string"/>
+														<xs:element name="mun" type="xs:integer"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+						
+							</xs:sequence>
+					 
+					 </xs:complexType>
+				
+				</xs:element>
+			
+			</xs:sequence>
+		
+	    </xs:complexType>
+	
+    </xs:element>
+
+</xs:schema>
+
+
+
+
+
